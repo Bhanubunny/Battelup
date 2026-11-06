@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Rounded Rect -->
+  <rect width="512" height="512" rx="128" fill="#071328"/>
+  <rect width="480" height="480" x="16" y="16" rx="112" fill="url(#bg-grad)" fill-opacity="0.18" stroke="#a855f7" stroke-width="8"/>
+  
+  <!-- Shield Icon -->
+  <path d="M256 64 L384 112 V240 C384 328 328 396 256 448 C184 396 128 328 128 240 V112 Z" fill="#0b1739" stroke="#9333ea" stroke-width="12" stroke-linejoin="round"/>
+  
+  <!-- Trophy / Gamepad center -->
+  <path d="M192 192 H320 V256 C320 291 291 320 256 320 C221 320 192 291 192 256 Z" fill="url(#flame)"/>
+  <path d="M232 320 H280 V368 H232 Z" fill="#fbbf24"/>
+  <path d="M208 368 H304 V392 H208 Z" fill="#fbbf24" rx="6"/>
+  <path d="M192 208 H160 C146 208 136 218 136 232 C136 256 160 272 192 272 V252 C176 252 160 244 160 232 C160 228 164 224 168 224 H192 Z" fill="url(#flame)"/>
+  <path d="M320 208 H352 C366 208 376 218 376 232 C376 256 352 272 320 272 V252 C336 252 352 244 352 232 C352 228 348 224 344 224 H320 Z" fill="url(#flame)"/>
+  <!-- Star glow -->
+  <polygon points="256,128 266,158 298,158 272,178 282,208 256,188 230,208 240,178 214,158 246,158" fill="#ffffff"/>
+</svg>

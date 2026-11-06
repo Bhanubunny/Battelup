@@ -1,0 +1,207 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and balance information",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "wallet": {
+          "type": "object",
+          "properties": {
+            "deposit": { "type": "number" },
+            "winnings": { "type": "number" },
+            "bonus": { "type": "number" }
+          }
+        },
+        "isKycVerified": { "type": "boolean" },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "matchesPlayed": { "type": "number" },
+            "totalKills": { "type": "number" },
+            "totalWinnings": { "type": "number" }
+          }
+        },
+        "referredBy": { "type": "string" },
+        "referralClaimed": { "type": "boolean" },
+        "deviceId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["username", "email", "wallet"]
+    },
+    "AppSettings": {
+      "title": "App Settings",
+      "description": "Global application configuration",
+      "type": "object",
+      "properties": {
+        "referral": {
+          "type": "object",
+          "properties": {
+            "baseUrl": { "type": "string" },
+            "perReferralReward": { "type": "number" },
+            "rewardType": { "type": "string", "enum": ["deposit", "bonus", "both"] },
+            "depositPercentage": { "type": "number" },
+            "bonusPercentage": { "type": "number" },
+            "newUserReward": { "type": "number" }
+          }
+        },
+        "support": {
+          "type": "object",
+          "properties": {
+            "whatsapp": { "type": "string" },
+            "telegram": { "type": "string" },
+            "email": { "type": "string" }
+          }
+        }
+      }
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Financial transaction record",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["deposit", "withdraw", "win", "entry", "refund"] },
+        "amount": { "type": "number" },
+        "status": { "type": "string", "enum": ["completed", "pending", "failed"] },
+        "matchId": { "type": "string" },
+        "title": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "type", "amount", "status", "createdAt"]
+    },
+    "Game": {
+      "title": "Game",
+      "description": "Game category",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "image": { "type": "string" },
+        "players": { "type": "number" }
+      },
+      "required": ["title", "image"]
+    },
+    "Tournament": {
+      "title": "Tournament",
+      "description": "Match or tournament details",
+      "type": "object",
+      "properties": {
+        "gameId": { "type": "string" },
+        "title": { "type": "string" },
+        "image": { "type": "string" },
+        "entryFee": { "type": "number" },
+        "prizePool": { "type": "number" },
+        "perKill": { "type": "number" },
+        "time": { "type": "string" },
+        "totalSlots": { "type": "number" },
+        "filledSlots": { "type": "number" },
+        "map": { "type": "string" },
+        "perspective": { "type": "string" }
+      },
+      "required": ["gameId", "title", "entryFee", "totalSlots"]
+    },
+    "Registration": {
+      "title": "Registration",
+      "description": "A user's registration for a specific tournament",
+      "type": "object",
+      "properties": {
+        "tournamentId": { "type": "string" },
+        "userId": { "type": "string" },
+        "ign": { "type": "string" },
+        "slot": { "type": "number" },
+        "joinedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["tournamentId", "userId", "ign", "slot"]
+    },
+    "GameRule": {
+      "title": "Game Rule",
+      "description": "Rules for different game types",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["type", "rules"]
+    },
+    "GameMode": {
+      "title": "Game Mode",
+      "description": "Dynamic game mode configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "gameId": { "type": "string" },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "image": { "type": "string" },
+        "category": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["id", "gameId", "title", "image"]
+    },
+    "PaymentGateway": {
+      "title": "Payment Gateway",
+      "description": "Configuration for a single payment gateway",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "apiKey": { "type": "string" },
+        "secretKey": { "type": "string" },
+        "merchantId": { "type": "string" },
+        "webhookSecret": { "type": "string" },
+        "upiId": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "isActive"]
+    }
+  },
+  "firestore": {
+    "/paymentSettings/{gatewayId}": {
+      "schema": "PaymentGateway",
+      "description": "Configurations for multiple payment gateways"
+    },
+    "/gameModes/{modeId}": {
+      "schema": "GameMode",
+      "description": "Dynamic game mode configurations"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private user profiles"
+    },
+    "/games/{gameId}": {
+      "schema": "Game",
+      "description": "Public game categories"
+    },
+    "/tournaments/{tournamentId}": {
+      "schema": "Tournament",
+      "description": "Publicly viewable matches"
+    },
+    "/registrations/{registrationId}": {
+      "schema": "Registration",
+      "description": "Match entries"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Financial transaction history"
+    },
+    "/meta/counters": {
+      "schema": "object",
+      "description": "System-wide counters"
+    },
+    "/gameRules/{ruleId}": {
+      "schema": "GameRule",
+      "description": "Rules for various match types"
+    },
+    "/appSettings/{settingId}": {
+      "schema": "AppSettings",
+      "description": "Global application configuration"
+    }
+  }
+}

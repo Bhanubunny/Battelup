@@ -1,0 +1,18 @@
+{
+  "name": "Khel Galli - Free Fire Esports Tournaments",
+  "short_name": "Khel Galli",
+  "description": "Join daily Free Fire custom room matches, CS tournaments, and earn instant cash rewards.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071328",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
